@@ -3,7 +3,7 @@
 @section('title', 'List Produk')
 
 @section('content')
-<div>
+<div class="my-4">
     <h1 class="mb-4 text-center">Tambah Produk Baru</h1>
 
     <form action="{{ route('produks.store') }}" method="post">
@@ -23,8 +23,14 @@
             <input type="number" name="harga" id="harga" class="border border-gray-300 rounded p-2 w-full" required>
         </div>
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
-        <a href="{{ route('produks.index') }}">Kembali</a>
+        <div class="d-flex flex-row">
+            <div class="col">
+                <a href="{{ route('produks.index') }}" class="btn btn-secondary">Kembali</a>
+            </div>
+            <div class="col text-end">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </div>
     </form>
 </div>
 @endsection

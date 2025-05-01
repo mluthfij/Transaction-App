@@ -3,39 +3,36 @@
 @section('title', 'List Produk')
 
 @section('content')
-<div>
+<div class="my-4">
     <h1 class="mb-4 text-center">List Produk</h1>
 
-    <table class="table-auto border-collapse border border-gray-400">
-        <thead>
-            <tr>
-                <th class="border border-gray-300 py-1">Produk</th>
-                <th class="border border-gray-300 py-1">Stok</th>
-                <th class="border border-gray-300 py-1">Harga</th>
-                <th class="border border-gray-300 py-1">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($produks as $produk)
-                <tr>
-                    <td class="border border-gray-300 py-1 px-2">{{ $produk['produk'] }}</td>
-                    <td class="border border-gray-300 py-1 px-2">{{ $produk['stok'] }}</td>
-                    <td class="border border-gray-300 py-1 px-2">{{ $produk['harga'] }}</td>
-                    <td class="border border-gray-300 py-1 px-2">
-                        <form action="{{ route('transaksis.store') }}" method="POST">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach ($produks as $produk)
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a class="text-decoration-none" href="{{ route('produks.show', $produk->id) }}">{{ $produk['produk'] }}</a>
+                        </h5>
+                        <span class="card-text"><strong>Harga</strong>: {{ $produk['harga'] }}</span><br>
+                        <span class="card-text"><strong>Stok</strong>: {{ $produk['stok'] }}</span>
+
+                        <form class="text-end" action="{{ route('transaksis.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                             <input type="hidden" name="stok" value="{{ $produk->stok }}">
-                            <input type="number" name="quantity" value="1" min="1" max="{{ $produk->stok }}" class="w-16 border border-gray-300 rounded px-2">
-                            <button type="submit" class="btn btn-primary">Beli</button>
-                        </form> |
-                        <a href="{{ route('produks.show', $produk->id) }}">Show</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
 
-    <a href="{{ route('produks.new') }}" class="btn my-4">Tambah Produk</a>
+                            <div class="input-group my-3">
+                                <input type="number" class="form-control" name="quantity" value="{{ $produk->stok === 0 ? 0 : 1 }}" min="1" max="{{ $produk->stok }}" {{ $produk->stok === 0 ? 'disabled' : '' }}>
+                                <button class="btn btn-outline-primary {{ $produk->stok === 0 ? 'disabled' : '' }}" type="submit">Beli</button>
+                              </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    <a href="{{ route('produks.new') }}" class="btn btn-primary my-4">Tambah Produk</a>
 </div>
 @endsection

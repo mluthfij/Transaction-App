@@ -3,26 +3,40 @@
 @section('title', 'List Detail Transaksi')
 
 @section('content')
-<div>
+<div class="my-4">
     <h1 class="mb-4 text-center">List Detail Transaksi</h1>
 
-    <table class="table-auto border-collapse border border-gray-400">
-        <thead>
-            <tr>
-                <th class="border border-gray-300 py-1">Produk</th>
-                <th class="border border-gray-300 py-1">Transaksi</th>
-                <th class="border border-gray-300 py-1">Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($detail_transaksis as $detail_transaksi)
-                <tr>
-                    <td class="border border-gray-300 py-1 px-2">{{ $detail_transaksi->produk->produk }}</td>
-                    <td class="border border-gray-300 py-1 px-2">{{ $detail_transaksi->transaksi->kode_transaksi }}</td>
-                    <td class="border border-gray-300 py-1 px-2">{{ $detail_transaksi['quantity'] }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="table-container">
+        @foreach ($detail_transaksis as $detail_transaksi)
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="table-secondary">
+                        <th colspan="6">No Transaksi: <span style="font-weight: normal;">{{ $detail_transaksi->transaksi->kode_transaksi }}</span></th>
+                    </tr>
+                    <tr class="table-secondary">
+                        <th colspan="6">Tanggal: <span style="font-weight: normal;">{{ $detail_transaksi->transaksi->tanggal }}</span></th>
+                    </tr>
+                    <tr class="table-primary">
+                        <th>No</th>
+                        <th>Produk</th>
+                        <th>Quantity</th>
+                        <th>Harga</th>
+                        <th>Total</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $detail_transaksi->produk->produk }}</td>
+                        <td>{{ $detail_transaksi->quantity }}</td>
+                        <td>{{ $detail_transaksi->produk->harga }}</td>
+                        <td>{{ $detail_transaksi->produk->harga * $detail_transaksi->quantity }}</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        @endforeach
+    </div>
 </div>
 @endsection

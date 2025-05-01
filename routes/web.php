@@ -6,7 +6,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DetailTransaksiController;
 
 Route::get('/', function () {
-    return view('app');
+    return redirect()->route('produks.index');
 });
 
 // Produk routes

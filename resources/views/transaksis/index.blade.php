@@ -3,30 +3,34 @@
 @section('title', 'List Transaksi')
 
 @section('content')
-<div>
+<div class="my-4">
     <h1 class="mb-4 text-center">List Transaksi</h1>
 
-    <table class="table-auto border-collapse border border-gray-400">
-        <thead>
-            <tr>
-                <th class="border border-gray-300 py-1">Kode Transaksi</th>
-                <th class="border border-gray-300 py-1">Tanggal</th>
-                <th class="border border-gray-300 py-1">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($transaksis as $transaksi)
-                <tr>
-                    <td class="border border-gray-300 py-1 px-2">{{ $transaksi['kode_transaksi'] }}</td>
-                    <td class="border border-gray-300 py-1 px-2">{{ $transaksi['tanggal'] }}</td>
-                    <td class="border border-gray-300 py-1 px-2">
-                        <a href="{{ route('transaksis.show', $transaksi->id) }}">Show</a>
-                    </td>
+    <div class="table-container">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="table-primary">
+                    <th>No</th>
+                    <th>Kode Transaksi</th>
+                    <th>Tanggal</th>
+                    <th>Aksi</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($transaksis as $transaksi)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $transaksi['kode_transaksi'] }}</td>
+                        <td>{{ $transaksi['tanggal'] }}</td>
+                        <td>
+                            <a href="{{ route('transaksis.show', $transaksi->id) }}" class="btn btn-primary btn-sm">Show</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+    </div>
 
-    <a href="{{ route('produks.index') }}">Kembali</a>
+    <a href="{{ route('produks.index') }}" class="btn btn-secondary my-4">Kembali</a>
 </div>
 @endsection
