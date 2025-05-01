@@ -32,7 +32,7 @@
                         <td>{{ $detail_transaksi->quantity }}</td>
                         <td>{{ $detail_transaksi->produk->harga }}</td>
                         <td>{{ $detail_transaksi->produk->harga * $detail_transaksi->quantity }}</td>
-                        <td>-</td>
+                        <td><a href="{{ route('detail_transaksis.show', $detail_transaksi->id) }}" class="btn btn-primary btn-sm">Show</a></td>
                     </tr>
                 </tbody>
             </table>

@@ -22,3 +22,4 @@ Route::post('/transaksis', TransaksiController::class .'@store')->name('transaks
 
 // Detail Transaksi routes
 Route::get('/detail_transaksis', DetailTransaksiController::class .'@index')->name('detail_transaksis.index');
+Route::get('/detail_transaksis/{detail_transaksi}', DetailTransaksiController::class .'@show')->name('detail_transaksis.show');

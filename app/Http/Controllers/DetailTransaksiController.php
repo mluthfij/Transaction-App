@@ -29,7 +29,8 @@ class DetailTransaksiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $detail_transaksi = DetailTransaksi::with(['produk', 'transaksi'])->findOrFail($id);
+        return view('detail_transaksis.show', compact('detail_transaksi'));
     }
 
     /**
