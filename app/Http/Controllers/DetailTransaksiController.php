@@ -46,6 +46,8 @@ class DetailTransaksiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $detail_transaksi = DetailTransaksi::find($id);
+        $detail_transaksi->delete();
+        return redirect()->route('detail_transaksis.index')->with('success', 'Detail transaksi telah dihapus.');
     }
 }

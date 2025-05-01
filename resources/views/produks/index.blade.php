@@ -19,7 +19,7 @@
 
                         <form class="text-end" action="{{ route('transaksis.store') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+                            <input type="hidden" name="id_produk" value="{{ $produk->id }}">
                             <input type="hidden" name="stok" value="{{ $produk->stok }}">
 
                             <div class="input-group my-3">

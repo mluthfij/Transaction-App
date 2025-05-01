@@ -23,7 +23,15 @@
                         <td>{{ $transaksi['kode_transaksi'] }}</td>
                         <td>{{ $transaksi['tanggal'] }}</td>
                         <td>
-                            <a href="{{ route('transaksis.show', $transaksi->id) }}" class="btn btn-primary btn-sm">Show</a>
+                            <div class="d-flex">
+                                <a href="{{ route('transaksis.show', $transaksi->id) }}" class="btn btn-primary btn-sm me-2">Show</a>
+
+                                <form action="{{ route('transaksis.destroy', $transaksi->id) }}" method="post"  onsubmit="return confirm('Apakah anda yakin ingin menghapus transaksi ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

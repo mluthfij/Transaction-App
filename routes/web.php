@@ -14,12 +14,15 @@ Route::get('/produks', ProdukController::class .'@index')->name('produks.index')
 Route::get('/produks/new', ProdukController::class .'@new')->name('produks.new');
 Route::get('/produks/{produk}', ProdukController::class .'@show')->name('produks.show');
 Route::post('/produks', ProdukController::class .'@store')->name('produks.store');
+Route::delete('/produks/{produk}', ProdukController::class .'@destroy')->name('produks.destroy');
 
 // Transaksi routes
 Route::get('/transaksis', TransaksiController::class .'@index')->name('transaksis.index');
 Route::get('/transaksis/{transaksi}', TransaksiController::class .'@show')->name('transaksis.show');
 Route::post('/transaksis', TransaksiController::class .'@store')->name('transaksis.store');
+Route::delete('/transaksis/{transaksi}', TransaksiController::class .'@destroy')->name('transaksis.destroy');
 
 // Detail Transaksi routes
 Route::get('/detail_transaksis', DetailTransaksiController::class .'@index')->name('detail_transaksis.index');
 Route::get('/detail_transaksis/{detail_transaksi}', DetailTransaksiController::class .'@show')->name('detail_transaksis.show');
+Route::delete('/detail_transaksis/{detail_transaksi}', DetailTransaksiController::class .'@destroy')->name('detail_transaksis.destroy');

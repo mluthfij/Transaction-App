@@ -62,6 +62,8 @@ class ProdukController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $produk = Produk::find($id);
+        $produk->delete();
+        return redirect()->route('produks.index')->with('success', 'Produk telah dihapus.');
     }
 }

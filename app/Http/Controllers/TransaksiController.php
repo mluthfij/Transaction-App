@@ -32,7 +32,7 @@ class TransaksiController extends Controller
 
         $this->createDetailTransaksi($transaksi->id, $request);
 
-        $produk = Produk::find($request->produk_id);
+        $produk = Produk::find($request->id_produk);
         $produk->decrement('stok', $request->quantity);
 
         return redirect()->route('transaksis.index')->with('success', 'Transaksi berhasil ditambahkan.');
@@ -60,14 +60,16 @@ class TransaksiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+        $transaksi->delete();
+        return redirect()->route('transaksis.index')->with('success', 'transaksi telah dihapus.');
     }
 
     private function createDetailTransaksi($transaksiId, Request $request)
     {
         DetailTransaksi::create([
-            'transaksi_id' => $transaksiId,
-            'produk_id' => $request->produk_id,
+            'id_transaksi' => $transaksiId,
+            'id_produk' => $request->id_produk,
             'quantity' => $request->quantity,
         ]);
     }

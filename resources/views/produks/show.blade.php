@@ -10,6 +10,14 @@
     <p><strong>Stok:</strong> {{ $produk['stok'] }} </p>
     <p><strong>Harga:</strong> {{ 'Rp.' . number_format($produk['harga'], 0, ',', '.') }} </p>
 
-    <a href="{{ route('produks.index') }}" class="btn btn-secondary my-4">List Produk</a>
+    <div class="d-flex my-4">
+        <a href="{{ route('produks.index') }}" class="btn btn-secondary me-2">List Produk</a>
+
+        <form action="{{ route('produks.destroy', $produk->id) }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus produk ini?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
 </div>
 @endsection

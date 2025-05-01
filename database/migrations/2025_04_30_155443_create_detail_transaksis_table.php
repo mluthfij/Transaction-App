@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('detail_transaksis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('transaksi_id');
-            $table->unsignedBigInteger('produk_id');
+            $table->unsignedBigInteger('id_transaksi')->casecadeOnDelete();
+            $table->unsignedBigInteger('id_produk')->casecadeOnDelete();
             $table->integer('quantity');
             $table->timestamps();
         });

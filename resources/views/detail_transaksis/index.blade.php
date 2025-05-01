@@ -32,7 +32,17 @@
                         <td>{{ $detail_transaksi->quantity }}</td>
                         <td>{{ 'Rp.' . number_format($detail_transaksi->produk->harga, 0, ',', '.') }}</td>
                         <td>{{ 'Rp.' . number_format($detail_transaksi->produk->harga * $detail_transaksi->quantity, 0, ',', '.') }}</td>
-                        <td><a href="{{ route('detail_transaksis.show', $detail_transaksi->id) }}" class="btn btn-primary btn-sm">Show</a></td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="{{ route('detail_transaksis.show', $detail_transaksi->id) }}" class="btn btn-primary btn-sm me-2">Show</a>
+                                
+                                <form action="{{ route('detail_transaksis.destroy', $detail_transaksi->id) }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus detail transaksi ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
