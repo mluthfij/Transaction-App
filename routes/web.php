@@ -8,6 +8,14 @@ Route::get('/', function () {
     return view('app');
 });
 
+// Produk routes
 Route::get('/produks', ProdukController::class .'@index')->name('produks.index');
+Route::get('/produks/new', ProdukController::class .'@new')->name('produks.new');
+Route::get('/produks/{produk}', ProdukController::class .'@show')->name('produks.show');
+Route::post('/produks', ProdukController::class .'@store')->name('produks.store');
+
+// Transaksi routes
 Route::get('/transaksis', TransaksiController::class .'@index')->name('transaksis.index');
+
+// Detail Transaksi routes
 Route::get('/detail_transaksis', TransaksiController::class .'@index')->name('detail_transaksis.index');

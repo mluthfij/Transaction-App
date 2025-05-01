@@ -17,11 +17,27 @@ class ProdukController extends Controller
     }
 
     /**
+     * Display new form.
+     */
+    public function new()
+    {
+        return view('produks.new');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'produk' => 'required|string|max:255',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
+        ]);
+
+        Produk::create($request->all());
+
+        return redirect()->route('produks.index')->with('success', 'Produk created successfully.');
     }
 
     /**
@@ -29,7 +45,8 @@ class ProdukController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $produk = Produk::find($id);
+        return view('produks.show', compact('produk'));
     }
 
     /**
