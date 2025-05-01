@@ -22,6 +22,13 @@
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-white flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
         <h1 class="text-white mb-4">Transaction App</h1>
 
+        <hr>
+        <a href="{{ route('produks.index') }}">Produk</a> |
+        <a href="{{ route('transaksis.index') }}">Transaksi</a> |
+        <a href="{{ route('detail_transaksis.index') }}">Detail Transaksi</a>
+        <hr>
+        <br>
+
         @yield('content')
     </body>
 </html>

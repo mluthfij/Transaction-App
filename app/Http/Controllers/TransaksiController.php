@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
+use Carbon\Carbon;
 
 class TransaksiController extends Controller
 {
@@ -21,7 +22,18 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $transaksi = Transaksi::forceCreate(
+            [
+                'tanggal' => Carbon::now()->format('y-m-d'),
+                'kode_transaksi' => '',
+            ]
+        );
+
+        $kode = $transaksi->id . Carbon::now()->format('ymd');
+        $transaksi->kode_transaksi = $kode;
+        $transaksi->save();
+
+        return redirect()->route('transaksis.index')->with('success', 'Transaksi berhasil ditambahkan.');
     }
 
     /**
@@ -29,7 +41,8 @@ class TransaksiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id);
+        return view('transaksis.show', compact('transaksi'));
     }
 
     /**

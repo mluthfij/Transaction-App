@@ -22,6 +22,10 @@
                     <td class="border border-gray-300 py-1 px-2">{{ $produk['stok'] }}</td>
                     <td class="border border-gray-300 py-1 px-2">{{ $produk['harga'] }}</td>
                     <td class="border border-gray-300 py-1 px-2">
+                        <form action="{{ route('transaksis.store') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Beli</button>
+                        </form> |
                         <a href="{{ route('produks.show', $produk->id) }}">Show</a>
                     </td>
                 </tr>

@@ -11,6 +11,7 @@
             <tr>
                 <th class="border border-gray-300 py-1">Kode Transaksi</th>
                 <th class="border border-gray-300 py-1">Tanggal</th>
+                <th class="border border-gray-300 py-1">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -18,9 +19,14 @@
                 <tr>
                     <td class="border border-gray-300 py-1 px-2">{{ $transaksi['kode_transaksi'] }}</td>
                     <td class="border border-gray-300 py-1 px-2">{{ $transaksi['tanggal'] }}</td>
+                    <td class="border border-gray-300 py-1 px-2">
+                        <a href="{{ route('transaksis.show', $transaksi->id) }}">Show</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <a href="{{ route('produks.index') }}">Kembali</a>
 </div>
 @endsection

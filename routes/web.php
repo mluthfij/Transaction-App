@@ -16,6 +16,8 @@ Route::post('/produks', ProdukController::class .'@store')->name('produks.store'
 
 // Transaksi routes
 Route::get('/transaksis', TransaksiController::class .'@index')->name('transaksis.index');
+Route::get('/transaksis/{transaksi}', TransaksiController::class .'@show')->name('transaksis.show');
+Route::post('/transaksis', TransaksiController::class .'@store')->name('transaksis.store');
 
 // Detail Transaksi routes
 Route::get('/detail_transaksis', TransaksiController::class .'@index')->name('detail_transaksis.index');
