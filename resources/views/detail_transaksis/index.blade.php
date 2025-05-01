@@ -17,8 +17,8 @@
         <tbody>
             @foreach ($detail_transaksis as $detail_transaksi)
                 <tr>
-                    <td class="border border-gray-300 py-1 px-2">{{ $detail_transaksi['id_produk'] }}</td>
-                    <td class="border border-gray-300 py-1 px-2">{{ $detail_transaksi['id_transaksi'] }}</td>
+                    <td class="border border-gray-300 py-1 px-2">{{ $detail_transaksi->produk->produk }}</td>
+                    <td class="border border-gray-300 py-1 px-2">{{ $detail_transaksi->transaksi->kode_transaksi }}</td>
                     <td class="border border-gray-300 py-1 px-2">{{ $detail_transaksi['quantity'] }}</td>
                 </tr>
             @endforeach

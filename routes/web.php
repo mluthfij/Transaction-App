@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\DetailTransaksiController;
 
 Route::get('/', function () {
     return view('app');
@@ -20,4 +21,4 @@ Route::get('/transaksis/{transaksi}', TransaksiController::class .'@show')->name
 Route::post('/transaksis', TransaksiController::class .'@store')->name('transaksis.store');
 
 // Detail Transaksi routes
-Route::get('/detail_transaksis', TransaksiController::class .'@index')->name('detail_transaksis.index');
+Route::get('/detail_transaksis', DetailTransaksiController::class .'@index')->name('detail_transaksis.index');

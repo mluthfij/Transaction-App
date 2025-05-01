@@ -24,6 +24,9 @@
                     <td class="border border-gray-300 py-1 px-2">
                         <form action="{{ route('transaksis.store') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+                            <input type="hidden" name="stok" value="{{ $produk->stok }}">
+                            <input type="number" name="quantity" value="1" min="1" max="{{ $produk->stok }}" class="w-16 border border-gray-300 rounded px-2">
                             <button type="submit" class="btn btn-primary">Beli</button>
                         </form> |
                         <a href="{{ route('produks.show', $produk->id) }}">Show</a>

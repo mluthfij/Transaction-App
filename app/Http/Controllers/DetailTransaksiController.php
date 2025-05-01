@@ -12,7 +12,7 @@ class DetailTransaksiController extends Controller
      */
     public function index()
     {
-        $detail_transaksis = DetailTransaksi::all();
+        $detail_transaksis = DetailTransaksi::with(['produk', 'transaksi'])->get();
         return view('detail_transaksis.index', compact('detail_transaksis'));
     }
 
