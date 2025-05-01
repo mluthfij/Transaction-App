@@ -26,8 +26,8 @@
             <tr>
                 <td>{{ $detail_transaksi->produk->produk }}</td>
                 <td>{{ $detail_transaksi->quantity }}</td>
-                <td>{{ $detail_transaksi->produk->harga }}</td>
-                <td>{{ $detail_transaksi->produk->harga * $detail_transaksi->quantity }}</td>
+                <td>{{ 'Rp.' . number_format($detail_transaksi->produk->harga, 0, ',', '.') }}</td>
+                <td>{{ 'Rp.' . number_format($detail_transaksi->produk->harga * $detail_transaksi->quantity, 0, ',', '.') }}</td>
                 <td>-</td>
             </tr>
         </tbody>

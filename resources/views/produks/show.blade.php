@@ -8,7 +8,7 @@
 
     <p><strong>Produk:</strong> {{ $produk['produk'] }} </p>
     <p><strong>Stok:</strong> {{ $produk['stok'] }} </p>
-    <p><strong>Harga:</strong> {{ $produk['harga'] }} </p>
+    <p><strong>Harga:</strong> {{ 'Rp.' . number_format($produk['harga'], 0, ',', '.') }} </p>
 
     <a href="{{ route('produks.index') }}" class="btn btn-secondary my-4">List Produk</a>
 </div>

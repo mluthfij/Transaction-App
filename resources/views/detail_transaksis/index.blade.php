@@ -30,8 +30,8 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $detail_transaksi->produk->produk }}</td>
                         <td>{{ $detail_transaksi->quantity }}</td>
-                        <td>{{ $detail_transaksi->produk->harga }}</td>
-                        <td>{{ $detail_transaksi->produk->harga * $detail_transaksi->quantity }}</td>
+                        <td>{{ 'Rp.' . number_format($detail_transaksi->produk->harga, 0, ',', '.') }}</td>
+                        <td>{{ 'Rp.' . number_format($detail_transaksi->produk->harga * $detail_transaksi->quantity, 0, ',', '.') }}</td>
                         <td><a href="{{ route('detail_transaksis.show', $detail_transaksi->id) }}" class="btn btn-primary btn-sm">Show</a></td>
                     </tr>
                 </tbody>

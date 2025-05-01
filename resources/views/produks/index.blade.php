@@ -14,7 +14,7 @@
                         <h5 class="card-title">
                             <a class="text-decoration-none" href="{{ route('produks.show', $produk->id) }}">{{ $produk['produk'] }}</a>
                         </h5>
-                        <span class="card-text"><strong>Harga</strong>: {{ $produk['harga'] }}</span><br>
+                        <span class="card-text"><strong>Harga</strong>: {{ 'Rp.' . number_format($produk->harga, 0, ',', '.') }}</span><br>
                         <span class="card-text"><strong>Stok</strong>: {{ $produk['stok'] }}</span>
 
                         <form class="text-end" action="{{ route('transaksis.store') }}" method="POST">
