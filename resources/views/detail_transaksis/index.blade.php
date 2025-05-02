@@ -30,10 +30,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php $counter = 1; @endphp
                     @foreach ($detail_transaksis as $detail_transaksi)
                         @if ($detail_transaksi->id_transaksi == $transaksi->id)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $counter++ }}</td>
                                 <td>{{ $detail_transaksi->produk->produk }}</td>
                                 <td>{{ $detail_transaksi->quantity }}</td>
                                 <td>{{ 'Rp.' . number_format($detail_transaksi->produk->harga, 0, ',', '.') }}</td>
