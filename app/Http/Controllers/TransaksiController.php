@@ -127,7 +127,12 @@ class TransaksiController extends Controller
         } else {
             foreach ($cart as $index => $cartItem) {
                 if ($cartItem['id_produk'] == $request->id_produk) {
-                    $cart[$index]['quantity'] += $request->quantity;
+                    $produk = Produk::find($request->id_produk);
+                    if ($produk->stok >= ($cartItem['quantity'] + $request->quantity)) {
+                        $cart[$index]['quantity'] += $request->quantity;
+                    } else {
+                        return redirect()->route('produks.index')->with('error', 'Stok tidak mencukupi.');
+                    }
                     break;
                 }
             }
