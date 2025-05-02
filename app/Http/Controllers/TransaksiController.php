@@ -77,7 +77,7 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::find($id);
         $transaksi->delete();
-        return redirect()->route('transaksis.index')->with('success', 'transaksi telah dihapus.');
+        return redirect()->route('transaksis.index')->with('success', 'Transaksi telah dihapus.');
     }
 
     private function createDetailTransaksi($transaksiId, Request $request)
