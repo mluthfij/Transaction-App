@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DetailTransaksi;
+use App\Models\Transaksi;
 
 class DetailTransaksiController extends Controller
 {
@@ -13,7 +14,8 @@ class DetailTransaksiController extends Controller
     public function index()
     {
         $detail_transaksis = DetailTransaksi::with(['produk', 'transaksi'])->get();
-        return view('detail_transaksis.index', compact('detail_transaksis'));
+        $transaksis = Transaksi::all();
+        return view('detail_transaksis.index', compact('detail_transaksis', 'transaksis'));
     }
 
     /**

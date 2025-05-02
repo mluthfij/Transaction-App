@@ -32,3 +32,7 @@ Route::get('/detail_transaksis/{detail_transaksi}', DetailTransaksiController::c
 Route::get('/detail_transaksis/{detail_transaksi}/edit', DetailTransaksiController::class .'@edit')->name('detail_transaksis.edit');
 Route::delete('/detail_transaksis/{detail_transaksi}', DetailTransaksiController::class .'@destroy')->name('detail_transaksis.destroy');
 Route::put('/detail_transaksis/{detail_transaksi}', DetailTransaksiController::class .'@update')->name('detail_transaksis.update');
+
+// Keranjang routes
+Route::post('/transaksis/cart', TransaksiController::class .'@cart')->name('transaksis.cart');
+Route::post('/transaksis/clear', TransaksiController::class .'@clear')->name('transaksis.clear');

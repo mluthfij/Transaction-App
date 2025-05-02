@@ -24,16 +24,22 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+        $cart = session('cart', []);
+    
         $transaksi = $this->createTransaksi();
 
-        if ($request->quantity > $request->stok) {
-            return redirect()->route('produks.index')->with('error', 'Stok produk tidak mencukupi.');
+        foreach ($cart as $item) {
+            $detail_transaksi = $this->createDetailTransaksi($transaksi->id, $item['id_produk'], $item['quantity']);
+            $produk = Produk::find($item['id_produk']);
+            if ($produk) {
+                $produk->decrement('stok', $item['quantity']);
+            } else {
+                return redirect()->route('produks.index')->with('error', 'Produk tidak ditemukan.');
+            }
         }
 
-        $detail_transaksi = $this->createDetailTransaksi($transaksi->id, $request);
-
-        $produk = Produk::find($request->id_produk);
-        $produk->decrement('stok', $request->quantity);
+        // Clear the session cart
+        session()->forget('cart');
 
         return redirect()->route('detail_transaksis.show', $detail_transaksi->id)->with('success', 'Transaksi berhasil ditambahkan.');
     }
@@ -80,12 +86,12 @@ class TransaksiController extends Controller
         return redirect()->route('transaksis.index')->with('success', 'Transaksi telah dihapus.');
     }
 
-    private function createDetailTransaksi($transaksiId, Request $request)
+    private function createDetailTransaksi($transaksiId, $id_produk, $quantity)
     {
         return DetailTransaksi::create([
             'id_transaksi' => $transaksiId,
-            'id_produk' => $request->id_produk,
-            'quantity' => $request->quantity,
+            'id_produk' => $id_produk,
+            'quantity' => $quantity,
         ]);
     }
 
@@ -103,5 +109,37 @@ class TransaksiController extends Controller
         $transaksi->save();
 
         return $transaksi;
+    }
+
+    public function cart(Request $request)
+    {
+        $item = [
+            'id_transaksi' => $request->id_transaksi,
+            'id_produk' => $request->id_produk,
+            'quantity' => $request->quantity,
+        ];
+        
+        $cart = session('cart', []);
+
+        if (!collect($cart)->contains('id_produk', $request->id_produk)) {
+            array_push($cart, $item);
+            session(['cart' => $cart]);
+        } else {
+            foreach ($cart as $index => $cartItem) {
+                if ($cartItem['id_produk'] == $request->id_produk) {
+                    $cart[$index]['quantity'] += $request->quantity;
+                    break;
+                }
+            }
+            session(['cart' => $cart]);
+        }
+
+        return redirect()->route('produks.index')->with('success', 'Produk berhasil ditambahkan ke keranjang.');
+    }
+
+    public function clear()
+    {
+        session()->forget('cart');
+        return redirect()->route('produks.index')->with('success', 'Keranjang berhasil dikosongkan.');
     }
 }
