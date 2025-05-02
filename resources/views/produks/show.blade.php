@@ -13,10 +13,12 @@
     <div class="d-flex my-4">
         <a href="{{ route('produks.index') }}" class="btn btn-secondary me-2">List Produk</a>
 
+        <a href="{{ route('produks.edit', $produk->id) }}" class="btn btn-warning me-2">Edit</a>
+
         <form action="{{ route('produks.destroy', $produk->id) }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus produk ini?')">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-danger me-2">Delete</button>
         </form>
     </div>
 </div>

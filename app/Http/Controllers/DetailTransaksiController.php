@@ -21,7 +21,7 @@ class DetailTransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // store detail transaksi in TransaksiController
     }
 
     /**
@@ -38,7 +38,21 @@ class DetailTransaksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+        $detail_transaksi = DetailTransaksi::findOrFail($id);
+        $detail_transaksi->update($request->all());
+        return redirect()->route('detail_transaksis.show', $detail_transaksi->id)->with('success', 'Detail transaksi telah diperbarui.');
+    }
+
+    /**
+     * Display the specified resource for edit page.
+     */
+    public function edit(string $id)
+    {
+        $detail_transaksi = DetailTransaksi::with(['produk', 'transaksi'])->findOrFail($id);
+        return view('detail_transaksis.edit', compact('detail_transaksi'));
     }
 
     /**

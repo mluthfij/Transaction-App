@@ -30,6 +30,8 @@
                 <td>{{ 'Rp.' . number_format($detail_transaksi->produk->harga * $detail_transaksi->quantity, 0, ',', '.') }}</td>
                 <td>
                     <div class="d-flex">
+                        <a href="{{ route('detail_transaksis.edit', $detail_transaksi->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>
+
                         <form action="{{ route('detail_transaksis.destroy', $detail_transaksi->id) }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus detail transaksi ini?')">
                             @csrf
                             @method('DELETE')

@@ -35,9 +35,9 @@ class ProdukController extends Controller
             'stok' => 'required|integer|min:0',
         ]);
 
-        Produk::create($request->all());
+        $produk = Produk::create($request->all());
 
-        return redirect()->route('produks.index')->with('success', 'Produk created successfully.');
+        return redirect()->route('produks.show', $produk->id)->with('success', 'Produk created successfully.');
     }
 
     /**
@@ -54,7 +54,25 @@ class ProdukController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'produk' => 'required|string|max:255',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
+        ]);
+
+        $produk = Produk::find($id);
+        $produk->update($request->all());
+
+        return redirect()->route('produks.show', $produk->id)->with('success', 'Produk updated successfully.');
+    }
+
+    /**
+     * Display the specified resource for edit page.
+     */
+    public function edit(string $id)
+    {
+        $produk = Produk::find($id);
+        return view('produks.edit', compact('produk'));
     }
 
     /**

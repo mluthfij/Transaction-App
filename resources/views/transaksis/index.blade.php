@@ -25,6 +25,7 @@
                         <td>
                             <div class="d-flex">
                                 <a href="{{ route('transaksis.show', $transaksi->id) }}" class="btn btn-primary btn-sm me-2">Show</a>
+                                <a href="{{ route('transaksis.edit', $transaksi->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>
 
                                 <form action="{{ route('transaksis.destroy', $transaksi->id) }}" method="post"  onsubmit="return confirm('Apakah anda yakin ingin menghapus transaksi ini?')">
                                     @csrf

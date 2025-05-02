@@ -30,12 +30,12 @@ class TransaksiController extends Controller
             return redirect()->route('produks.index')->with('error', 'Stok produk tidak mencukupi.');
         }
 
-        $this->createDetailTransaksi($transaksi->id, $request);
+        $detail_transaksi = $this->createDetailTransaksi($transaksi->id, $request);
 
         $produk = Produk::find($request->id_produk);
         $produk->decrement('stok', $request->quantity);
 
-        return redirect()->route('transaksis.index')->with('success', 'Transaksi berhasil ditambahkan.');
+        return redirect()->route('detail_transaksis.show', $detail_transaksi->id)->with('success', 'Transaksi berhasil ditambahkan.');
     }
 
     /**
@@ -52,7 +52,22 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required|date',
+        ]);
+
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->update($request->all());
+        return redirect()->route('transaksis.show', $transaksi->id)->with('success', 'Transaksi berhasil diperbarui.');
+    }
+
+    /**
+     * Display the specified resource for edit page.
+     */
+    public function edit(string $id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+        return view('transaksis.edit', compact('transaksi'));
     }
 
     /**
@@ -67,7 +82,7 @@ class TransaksiController extends Controller
 
     private function createDetailTransaksi($transaksiId, Request $request)
     {
-        DetailTransaksi::create([
+        return DetailTransaksi::create([
             'id_transaksi' => $transaksiId,
             'id_produk' => $request->id_produk,
             'quantity' => $request->quantity,
