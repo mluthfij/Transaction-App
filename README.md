@@ -8,4 +8,4 @@
 Running locally:
 - run this command `composer dump-autoload && php artisan migrate:reset && php artisan migrate && php artisan db:seed --class=ProdukSeeder`
 - then run the server `php artisan serve --port=8000`
-- and open this link in the browser `http://localhost:8000/produks`
+- and open this link in the browser `http://localhost:8000`
